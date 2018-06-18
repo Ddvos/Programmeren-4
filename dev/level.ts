@@ -21,7 +21,7 @@ class Level {
         document.body.appendChild(this.scoreElement);
         
         this.cars.push(new Car(), new Car(), new Car(), new Car(), new Car())
-        this.player = new Player((innerWidth/2), 37, 39) // x postie, leftkey, rightkey
+        this.player = new Player((innerWidth/2), 37, 39,32, this.game) // x postie, leftkey, rightkey
     }
 
     public update(): void{

@@ -22,17 +22,20 @@ var Car = (function () {
     return Car;
 }());
 var Player = (function () {
-    function Player(xp, up, down) {
+    function Player(xp, up, down, g) {
         var _this = this;
         this.downSpeed = 0;
         this.upSpeed = 0;
         this.div = document.createElement("player");
         var level = document.getElementsByTagName("level")[0];
         level.appendChild(this.div);
+        this.game = g;
         this.upkey = up;
         this.downkey = down;
+        this.shootkey = 32;
         this.x = xp;
         this.y = 500;
+        window.addEventListener("keydown", function (e) { return _this.onKeySpaceDown(e); });
         window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
         window.addEventListener("keyup", function (e) { return _this.onKeyUp(e); });
     }
@@ -65,6 +68,14 @@ var Player = (function () {
             this.x = newX;
         this.div.style.transform = "translate(" + this.x + "px, " + this.y + "px)";
     };
+    Player.prototype.onKeySpaceDown = function (e) {
+        if (e.keyCode == 32) {
+            console.log("kogel komt wel door");
+            var rect = this.div.getBoundingClientRect();
+            var bullet = new Bullet(rect.left + 20, rect.top + 40);
+            this.game.addBullet(bullet);
+        }
+    };
     return Player;
 }());
 var Level = (function () {
@@ -77,7 +88,7 @@ var Level = (function () {
         this.scoreElement = document.createElement("score");
         document.body.appendChild(this.scoreElement);
         this.cars.push(new Car(), new Car(), new Car(), new Car(), new Car());
-        this.player = new Player((innerWidth / 2), 37, 39);
+        this.player = new Player((innerWidth / 2), 37, 39, 32, this.game);
     }
     Level.prototype.update = function () {
         this.scoreElement.innerHTML = "Score: " + this.score;
@@ -121,24 +132,54 @@ var GameOver = (function () {
 var Game = (function () {
     function Game() {
         this.currentscreen = new StartScreen(this);
+        this.bullets = new Array();
+        this.gameLoop();
     }
     Game.prototype.gameLoop = function () {
+        var _this = this;
         this.currentscreen.update();
-        requestAnimationFrame(this.gameLoop.bind(this));
+        for (var _i = 0, _a = this.bullets; _i < _a.length; _i++) {
+            var b = _a[_i];
+            b.move();
+        }
+        requestAnimationFrame(function () { return _this.gameLoop(); });
     };
     Game.prototype.showLevel = function () {
         document.body.innerHTML = "";
         this.currentscreen = new Level(this);
-        requestAnimationFrame(this.gameLoop.bind(this));
+    };
+    Game.prototype.addBullet = function (b) {
+        console.log("kogel komt wel door");
+        this.bullets.push(b);
     };
     Game.prototype.showGameoverScreen = function () {
-        console.log("Game over!!!!!!");
+        console.log("Game over");
         document.body.innerHTML = "";
         this.currentscreen = new GameOver(this);
     };
     return Game;
 }());
 window.addEventListener("load", function () { return new Game(); });
+var Bullet = (function () {
+    function Bullet(x, y) {
+        this.width = 25;
+        this.height = 25;
+        this.div = document.createElement("bullet");
+        document.body.appendChild(this.div);
+        this.x = x;
+        this.y = y;
+        this.xspeed = 0;
+        this.yspeed = -1;
+        console.log("kogel komt wel door");
+        this.move();
+    }
+    Bullet.prototype.move = function () {
+        this.x += this.xspeed;
+        this.y += this.yspeed;
+        this.div.style.transform = "translate(" + this.x + "px, " + this.y + "px)";
+    };
+    return Bullet;
+}());
 var Grave = (function () {
     function Grave(x, y) {
         this.div = document.createElement("grave");
@@ -162,7 +203,6 @@ var StartScreen = (function () {
     StartScreen.prototype.update = function () {
     };
     StartScreen.prototype.splashClicked = function () {
-        console.log("de game wordt wel gestart");
         this.game.showLevel();
     };
     return StartScreen;
