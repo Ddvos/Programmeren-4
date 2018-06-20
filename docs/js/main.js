@@ -22,20 +22,19 @@ var Car = (function () {
     return Car;
 }());
 var Player = (function () {
-    function Player(xp, up, down, g) {
+    function Player(xp, up, down, l) {
         var _this = this;
         this.downSpeed = 0;
         this.upSpeed = 0;
         this.div = document.createElement("player");
         var level = document.getElementsByTagName("level")[0];
         level.appendChild(this.div);
-        this.game = g;
+        this.level = l;
         this.upkey = up;
         this.downkey = down;
-        this.shootkey = 32;
         this.x = xp;
         this.y = 500;
-        window.addEventListener("keydown", function (e) { return _this.onKeySpaceDown(e); });
+        window.addEventListener("keydown", function (e) { return _this.onClick(e); });
         window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
         window.addEventListener("keyup", function (e) { return _this.onKeyUp(e); });
     }
@@ -68,12 +67,12 @@ var Player = (function () {
             this.x = newX;
         this.div.style.transform = "translate(" + this.x + "px, " + this.y + "px)";
     };
-    Player.prototype.onKeySpaceDown = function (e) {
+    Player.prototype.onClick = function (e) {
         if (e.keyCode == 32) {
-            console.log("kogel komt wel door");
             var rect = this.div.getBoundingClientRect();
             var bullet = new Bullet(rect.left + 20, rect.top + 40);
-            this.game.addBullet(bullet);
+            this.level.addBullet(bullet);
+            console.log(this.level.addBullet(bullet));
         }
     };
     return Player;
@@ -85,15 +84,27 @@ var Level = (function () {
         this.game = g;
         this.div = document.createElement("level");
         document.body.appendChild(this.div);
+        this.bullets = new Array();
         this.scoreElement = document.createElement("score");
         document.body.appendChild(this.scoreElement);
         this.cars.push(new Car(), new Car(), new Car(), new Car(), new Car());
-        this.player = new Player((innerWidth / 2), 37, 39, 32, this.game);
+        this.player = new Player((innerWidth / 2), 37, 39, this);
     }
     Level.prototype.update = function () {
+        var multiplier = Math.pow(10, 10 - 1);
+        this.score = this.score + multiplier;
         this.scoreElement.innerHTML = "Score: " + this.score;
-        for (var _i = 0, _a = this.cars; _i < _a.length; _i++) {
-            var c = _a[_i];
+        for (var _i = 0, _a = this.bullets; _i < _a.length; _i++) {
+            var b = _a[_i];
+            for (var _b = 0, _c = this.cars; _b < _c.length; _b++) {
+                var c = _c[_b];
+                if (this.checkCollision(c.getRectangle(), b.getRectangle())) {
+                    console.log("het werkt");
+                }
+            }
+        }
+        for (var _d = 0, _e = this.cars; _d < _e.length; _d++) {
+            var c = _e[_d];
             c.update();
             if (this.checkCollision(c.getRectangle(), this.player.getRectangle())) {
                 this.game.showGameoverScreen();
@@ -104,6 +115,13 @@ var Level = (function () {
             c.update();
         }
         this.player.update();
+        for (var _f = 0, _g = this.bullets; _f < _g.length; _f++) {
+            var b = _g[_f];
+            b.move();
+        }
+    };
+    Level.prototype.addBullet = function (b) {
+        this.bullets.push(b);
     };
     Level.prototype.checkCollision = function (a, b) {
         return (a.left <= b.right &&
@@ -132,25 +150,18 @@ var GameOver = (function () {
 var Game = (function () {
     function Game() {
         this.currentscreen = new StartScreen(this);
-        this.bullets = new Array();
+        this.scoreElement = document.createElement("score");
+        document.body.appendChild(this.scoreElement);
         this.gameLoop();
     }
     Game.prototype.gameLoop = function () {
         var _this = this;
         this.currentscreen.update();
-        for (var _i = 0, _a = this.bullets; _i < _a.length; _i++) {
-            var b = _a[_i];
-            b.move();
-        }
         requestAnimationFrame(function () { return _this.gameLoop(); });
     };
     Game.prototype.showLevel = function () {
         document.body.innerHTML = "";
         this.currentscreen = new Level(this);
-    };
-    Game.prototype.addBullet = function (b) {
-        console.log("kogel komt wel door");
-        this.bullets.push(b);
     };
     Game.prototype.showGameoverScreen = function () {
         console.log("Game over");
@@ -170,9 +181,13 @@ var Bullet = (function () {
         this.y = y;
         this.xspeed = 0;
         this.yspeed = -1;
-        console.log("kogel komt wel door");
         this.move();
     }
+    Bullet.prototype.getRectangle = function () {
+        return this.div.getBoundingClientRect();
+    };
+    Bullet.prototype.update = function () {
+    };
     Bullet.prototype.move = function () {
         this.x += this.xspeed;
         this.y += this.yspeed;

@@ -16,7 +16,7 @@ class Car {
        
     }
 
-    // this will rturn the postion of the element 
+    // this will rturn the postion of the element to level 
     public getRectangle() {
         return this.div.getBoundingClientRect() 
     }

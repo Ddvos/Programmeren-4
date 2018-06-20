@@ -5,11 +5,14 @@ class Game {
     
     
     private currentscreen:any
-    private bullets:Array<Bullet>;
+    private scoreElement: HTMLElement;
+   
      
     constructor() {
         this.currentscreen = new StartScreen(this) // startscherm will be shown
-        this.bullets = new Array<Bullet>();
+        this.scoreElement = document.createElement("score");
+        document.body.appendChild(this.scoreElement);
+   
         this.gameLoop()   
     }
     
@@ -17,11 +20,10 @@ class Game {
     // this frunction will loop level
     private gameLoop(){
       
-        this.currentscreen.update()     
+        this.currentscreen.update()  
         
-        for(let b of this.bullets){
-            b.move();
-        }
+     
+    
         requestAnimationFrame(() => this.gameLoop())
     }
 
@@ -33,10 +35,6 @@ class Game {
        
     }
 
-    public addBullet(b:Bullet){
-        console.log("kogel komt wel door")
-        this.bullets.push(b);
-    }
 
     // this function will run when you are game over
     public showGameoverScreen() {

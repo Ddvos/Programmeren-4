@@ -20,8 +20,17 @@ class Bullet {
 
         this.xspeed = 0;
         this.yspeed = -1;
-        console.log("kogel komt wel door")
+      
         this.move();
+    }
+
+      // this will rturn the postion of the element 
+      public getRectangle() {
+        return this.div.getBoundingClientRect() 
+    }
+
+    public update(){
+
     }
 
     public move():void {
