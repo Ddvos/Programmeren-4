@@ -1,28 +1,25 @@
 html, body {
-    background-color: #70CF51;
-    font-family: 'Press Start 2P', cursive;
-    color:white;
-    overflow:hidden;
-    margin:0px; padding:0px;
-    background-image: url('../images/space2.jpg');
-    background-size: cover;
+    height:             100%;
+}
+
+body {
+    background-color:   #70CF51;
+    font-family:        'Press Start 2P', cursive;
+    color:              white;
+    font-size:          22px;
+    overflow:           hidden;
+    margin:             0px; 
+    padding:            0px;
+    background-image:   url(../images/space2.jpg);
+    background-repeat:  no-repeat;
+    background-size:    cover;
 }
 
 body * {
-    position: absolute;
-    display: block;
-    margin:0px; padding:0px;
-    box-sizing: border-box;
-    background-repeat: no-repeat;
-}
-
-ui {
-    font-size:22px;
-    text-shadow: 4px 4px 0px black;
-    color:white;
-    padding:20px;
-    width:100%;
-    text-align: center;
+    position:           absolute;
+    display:            block;
+    box-sizing:         border-box;
+    background-repeat:  no-repeat;
 }
 
 splash {
@@ -36,31 +33,25 @@ splash {
     text-align:center;
 }
 
-level {
-    position: absolute;
-    display: block;
-    box-sizing: border-box;
-    background-repeat: no-repeat;
+phaserbeam {
+    background-image:   url(../images/bullet1.png);
+    width:              25px;
+    height:             25px;
+    background-size:    contain;
 }
 
-meteor {
-	width:80px; min-height:80px;
-	background-image: url('../images/meteor1.png');
+astroid {
+    background-image:   url(../images/meteor1.png);
+    width:              81px;
+    height:             80px;
+    background-size:    contain;
 }
 
-grave {
-	width:129px; min-height:110px;
-	background-image: url('../images/grave.png');
-}
-
-player {
-    width:80px; height:75px;
-    background-image: url('../images/ship3.png');
-}
-
-bullet {
-    width:25px; height:25px;
-    background-image: url('../images/bullet1.png');
+spaceship {
+    background-image:   url(../images/ship3.png);
+    width:              80px; 
+    height:             76px;
+    background-size:    contain;
 }
 
 score {
@@ -68,7 +59,7 @@ score {
     width:100%; height:100px;
     position: absolute;
     left:0px;
-    font-family: 'Press Start 2P', cursive;
+    font-family: 'Comfortaa';font-size: 22px;
     font-size: 2em;
     line-height: 1.2em;
     color:white;

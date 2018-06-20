@@ -1,11 +1,13 @@
 class Car {
 
+    private game: Game
     private speed: number = 0
     private div: HTMLElement
     private x: number
     private y: number
 
-    constructor() {
+    constructor(g:Game) {
+        this.game =g
         this.div = document.createElement("meteor")
         let level = document.getElementsByTagName("level")[0]!
         level.appendChild(this.div)
@@ -27,11 +29,14 @@ class Car {
         
         if (this.y  > window.innerWidth) {
             this.y = -80
-        }
-
-        
+        } 
 
         this.div.style.transform = "translate(" + this.x + "px, " + this.y + "px)"
+    }
+
+    public removeAstroid(){
+        this.div.remove()
+        this.game.currentscreen.removeFromArray(this)
     }
 
 }

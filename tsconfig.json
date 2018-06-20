@@ -4,10 +4,11 @@
         "target": "es5",
         "removeComments": true,
         "noUnusedLocals": true,
-        "strictPropertyInitialization": false,
         "noUnusedParameters": true,
+        "strictPropertyInitialization": false,
         "sourceMap": true,
-        "outFile": "docs/js/main.js"
+        "outFile": "docs/js/main.js",
+        "allowJs": true
     },
     "include": [
         "dev/**/*"

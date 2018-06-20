@@ -22,7 +22,7 @@ class Level {
         this.scoreElement = document.createElement("score");
         document.body.appendChild(this.scoreElement);
         
-        this.cars.push(new Car(), new Car(), new Car(), new Car(), new Car())
+        this.cars.push(new Car(this.game), new Car(this.game), new Car(this.game), new Car(this.game), new Car(this.game))
         this.player = new Player((innerWidth/2), 37, 39, this) // x postie, leftkey, rightkey
        
     }
@@ -33,18 +33,22 @@ class Level {
 
         this.score = this.score + multiplier;
         this.scoreElement.innerHTML = "Score: " +  this.score;
+
+
+        
       
         for(let b of this.bullets){
             
-             
-
              for(let c of this.cars){
-               
-
-                if(this.checkCollision(c.getRectangle(), b.getRectangle())){// if collision between bullet en meteor delete meteor
-                    console.log("het werkt")
+                for (var a = this.cars.length-1; a>=0; a--) {
+                 if(this.checkCollision(c.getRectangle(), b.getRectangle())){// if collision between bullet en meteor delete meteor
+                    this.cars[a].removeAstroid()
+                    }
+                    this.cars[a].update()
                 }
              }
+
+            
         }
         
        //cehcks colision between meteor and player
@@ -76,6 +80,11 @@ class Level {
 
     public addBullet(b:Bullet){ // fires bullet
         this.bullets.push(b);
+    }
+
+    public removeFromArray(removedMe: Car) {
+        let i = this.cars.indexOf(removedMe)
+        this.cars.splice(i, 1);
     }
 
 

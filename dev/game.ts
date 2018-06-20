@@ -1,50 +1,37 @@
-/// <reference path="level.ts"/>
-/// <reference path="gameover.ts"/>
+/// <reference path="../docs/js/audio.js"/>
+/// <reference path="playscreen.ts"/>
 
 class Game {
     
-    
-    private currentscreen:any
+    public currentscreen:any
+    public audio:any
     private scoreElement: HTMLElement;
-   
-     
+
     constructor() {
-        this.currentscreen = new StartScreen(this) // startscherm will be shown
+        this.currentscreen = new StartScreen(this)
         this.scoreElement = document.createElement("score");
         document.body.appendChild(this.scoreElement);
    
-        this.gameLoop()   
+        this.gameLoop()        
     }
     
-
-    // this frunction will loop level
-    private gameLoop(){
-      
-        this.currentscreen.update()  
-        
-     
-    
+    private gameLoop():void{
+        this.currentscreen.update()   
         requestAnimationFrame(() => this.gameLoop())
     }
 
-    // this function will run level
-    public showLevel() { 
+    public showPlayScreen() {
         document.body.innerHTML = ""
-        this.currentscreen = new Level(this);
-       
-       
+        this.currentscreen = new PlayScreen(this)
+        
     }
 
-
-    // this function will run when you are game over
     public showGameoverScreen() {
-        console.log("Game over")
         document.body.innerHTML = ""
-        this.currentscreen = new GameOver(this)
-      
-       
+        this.currentscreen = new GameOverScreen(this)
+     
     }
+
 } 
 
-
-window.addEventListener("load", ()=> new Game())
+window.addEventListener("load", () => new Game())
