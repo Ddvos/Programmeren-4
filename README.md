@@ -131,6 +131,8 @@ Let op: inmiddels is de game al flink gewijzigd
 https://koenwestra.github.io/game-typescript/
 
  Deze review maak ik aan de hand van de minimale eisen die door de opleiding zijn gesteld
+ 
+ ```
 • De code van het individuele project staat op GitHub.
 	Ja, ik kan de code terug vinden op GitHub
 • De game is online speelbaar.’
@@ -143,10 +145,10 @@ https://koenwestra.github.io/game-typescript/
        Nee, ik heb geen bugs gevonden.
 • Het project maakt gebruik van deze OOP principes:
 
-•	Classes		ja
-•	Encapsulation	ja 
-•	Composition		ja 
-•	Inheritance 	nee 
+	Classes		ja
+	Encapsulation	ja 
+	Composition	ja 
+	Inheritance 	nee 
 
 • De GitHub pagina bevat een ReadMe bestand. Dit bestand bevat:
 • Per bovengenoemd OOP principe een uitleg: waar is het toegepast, en waarom is het
@@ -155,7 +157,6 @@ op die plek toegepast. De uitleg is inclusief code voorbeelden.
 • Een link naar de peer review die in week 6 is gedaan.
 
 De bovenstaande punten zijn nog niet terug te vinden in de ReadMe
-
 
 Extra uitdagingen
 • De game ziet er zeer verzorgd uit dankzij goed uitgewerkt UI design en artwork.
@@ -168,5 +169,7 @@ Extra uitdagingen
 De game heeft ook nog geen extra uitdagingen
 
 De game heeft een goede gameplay en speelt lekker. Het is duidelijk hoe het spel in elkaar zit. Ik ben er wel achter gekomen dat de snake een maximale lengte kan hebben, dit vind ik zelf jammer. Omdat je het hierdoor niet echt kan uitspelen. Ook vind ik dat de snake nog wat langzaam gaat hierdoor is het spel vrij eenvoudig en is er niet echt een uitdaging. 
+
+```
 
 
