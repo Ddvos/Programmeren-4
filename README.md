@@ -125,6 +125,7 @@ Ik heb de audio library  Howler.js toegevoegd. Voor een geluidseffect als de las
 
 Ik heb een peer review voor de game van Koen Westra geschreven
 
+
 Let op: inmiddels is de game al flink gewijzigd 
 
 https://koenwestra.github.io/game-typescript/
@@ -141,4 +142,31 @@ https://koenwestra.github.io/game-typescript/
 • Er zijn geen bugs.
        Nee, ik heb geen bugs gevonden.
 • Het project maakt gebruik van deze OOP principes:
+
+•	Classes		ja
+•	Encapsulation	ja 
+•	Composition		ja 
+•	Inheritance 	nee 
+
+• De GitHub pagina bevat een ReadMe bestand. Dit bestand bevat:
+• Per bovengenoemd OOP principe een uitleg: waar is het toegepast, en waarom is het
+op die plek toegepast. De uitleg is inclusief code voorbeelden.
+• Een klassendiagram van de game.
+• Een link naar de peer review die in week 6 is gedaan.
+
+De bovenstaande punten zijn nog niet terug te vinden in de ReadMe
+
+
+Extra uitdagingen
+• De game ziet er zeer verzorgd uit dankzij goed uitgewerkt UI design en artwork.
+• De game bevat een hiscore lijst. Scores worden bewaard nadat de game is afgesloten.
+• De game werkt met Canvas in plaats van DOM elementen
+• De game bevat local of online multiplayer.
+• De game werkt op mobiele schermen en ondersteunt touchscreen controls.
+• De game maakt gebruik van device api's zoals de camera, microfoon, 
+
+De game heeft ook nog geen extra uitdagingen
+
+De game heeft een goede gameplay en speelt lekker. Het is duidelijk hoe het spel in elkaar zit. Ik ben er wel achter gekomen dat de snake een maximale lengte kan hebben, dit vind ik zelf jammer. Omdat je het hierdoor niet echt kan uitspelen. Ook vind ik dat de snake nog wat langzaam gaat hierdoor is het spel vrij eenvoudig en is er niet echt een uitdaging. 
+
 
