@@ -56,7 +56,7 @@ class Level {
 * Composition
 Ik heb gebruik gemaakt van meerdere documenten deze komen allemaal samen in mijn game.ts
 
- lass Game {
+ Class Game {
     
     public currentscreen:any
     public audio:any
