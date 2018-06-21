@@ -25,38 +25,38 @@ Inheritance
 
 
 * Classes/Encapsulation
-Ik heb gebruik gemaakt van Classes zodat mijn game overzichtelijk blijft. Hieronder is een voorbeeld van de class Level. Ook is hier te zien dat ik gebruik maak van Encapsulation. Dit houdt in dat je bijvoorbeeld een variabele op private of public zet. Public is bereikbaar voor iedereen private is alleen te gebruiken binnen de class. 
+Ik heb gebruik gemaakt van Classes zodat mijn game overzichtelijk blijft. Hieronder is een voorbeeld van de class Playscreen. Ook is hier te zien dat ik gebruik maak van Encapsulation. Dit houdt in dat je bijvoorbeeld een variabele op private of public zet. Public is bereikbaar voor iedereen private is alleen te gebruiken binnen de class. 
 
-class Level {
-    
-    private div: HTMLElement
-    private bullets:Array<Bullet>;
-    private cars:Car[] = [] // array with valling meteors
-    private player:Player
+class PlayScreen {
+
+    private phaserbeam: Phaserbeam
+    private astroids: Astroid[] = []
+    private spaceship: Spaceship
     private game: Game
+    private gamefix: number = 0
+    public score: number = 0
 
     private scoreElement:HTMLElement;
-    private score:number = 0;
 
-    
+
     constructor(g:Game) {
-        this.game = g    
-        this.div = document.createElement("level")
-        document.body.appendChild(this.div)
-        this.bullets = new Array<Bullet>();
+        this.game = g
+        this.spaceship = new Spaceship( 37, 39, 32, this.game)
+        // Start with 10 astroids
+        for (var i = 0; i < 10; i++) {
+            this.astroids.push(new Astroid(this.game))
+
+        }
+
         this.scoreElement = document.createElement("score");
         document.body.appendChild(this.scoreElement);
-        
-        this.cars.push(new Car(this.game), new Car(this.game), new Car(this.game), new Car(this.game), new Car(this.game))
-        this.player = new Player((innerWidth/2), 37, 39, this) // x postie, leftkey, rightkey
-       
     }
 
 
 * Composition
 Ik heb gebruik gemaakt van meerdere documenten deze komen allemaal samen in mijn game.ts
 
- Class Game {
+ class Game {
     
     public currentscreen:any
     public audio:any
@@ -79,12 +79,6 @@ Ik heb gebruik gemaakt van meerdere documenten deze komen allemaal samen in mijn
         document.body.innerHTML = ""
         this.currentscreen = new PlayScreen(this)
         
-    }
-
-    public showGameoverScreen() {
-        document.body.innerHTML = ""
-        this.currentscreen = new GameOverScreen(this)
-     
     }
 
 * Inheritance 
